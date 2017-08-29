@@ -10,6 +10,7 @@ use jugger\criteria\InCriteria;
 use jugger\criteria\LikeCriteria;
 use jugger\criteria\LogicCriteria;
 use jugger\criteria\RegexpCriteria;
+use jugger\criteria\SimpleLogicCriteria;
 use jugger\compareCriteria\CriteriaValidator;
 
 class GeneralTest extends TestCase
@@ -20,27 +21,27 @@ class GeneralTest extends TestCase
             [
                 'id' => 1,
                 'name' => 'test1',
-                'date' => new \DateTime("27.08.2017"),
+                'date' => new \DateTime("2017-08-27"),
             ],
             [
                 'id' => 2,
                 'name' => 'test1',
-                'date' => new \DateTime("27.01.2017"),
+                'date' => new \DateTime("2017-01-27"),
             ],
             [
                 'id' => 3,
                 'name' => 'test2',
-                'date' => new \DateTime("05.08.2017"),
+                'date' => new \DateTime("2017-08-05"),
             ],
             [
                 'id' => 4,
                 'name' => 'test3',
-                'date' => new \DateTime("11.11.2017"),
+                'date' => new \DateTime("2017-11-11"),
             ],
             [
                 'id' => 5,
                 'name' => 'another',
-                'date' => new \DateTime("27.08.2011"),
+                'date' => new \DateTime("2011-08-27"),
             ],
         ];
     }
@@ -51,11 +52,12 @@ class GeneralTest extends TestCase
         $validator = new CriteriaValidator(
             new BetweenCriteria("id", 2, 6)
         );
-        $this->assertTrue($validator->validate($data[0]));
-        $this->assertTrue($validator->validate($data[1]));
-        $this->assertFalse($validator->validate($data[2]));
-        $this->assertFalse($validator->validate($data[3]));
-        $this->assertFalse($validator->validate($data[4]));
+
+        $this->assertFalse($validator->validate($data[0]));
+        $this->assertFalse($validator->validate($data[1]));
+        $this->assertTrue($validator->validate($data[2]));
+        $this->assertTrue($validator->validate($data[3]));
+        $this->assertTrue($validator->validate($data[4]));
     }
 
     public function testCompare()
@@ -124,7 +126,7 @@ class GeneralTest extends TestCase
     {
         $data = $this->getData();
         $validator = new CriteriaValidator(
-            new LogicCriteria("AND", [
+            new LogicCriteria("and", [
                 new LikeCriteria("name", "test1"),
                 new EqualCriteria("id", 2),
             ])
