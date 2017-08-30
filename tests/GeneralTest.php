@@ -11,7 +11,7 @@ use jugger\criteria\LikeCriteria;
 use jugger\criteria\LogicCriteria;
 use jugger\criteria\RegexpCriteria;
 use jugger\criteria\SimpleLogicCriteria;
-use jugger\compareCriteria\CriteriaValidator;
+use jugger\criteriaValidator\CriteriaValidator;
 
 class GeneralTest extends TestCase
 {

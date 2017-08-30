@@ -1,5 +1,6 @@
 {
     "name": "jugger-php/jugger-criteria-validator",
+    "description": "Criteria validator",
     "license": "MIT",
     "authors": [
         {
@@ -13,7 +14,7 @@
         }
     },
     "require": {
-        "jugger-php/jugger-criteria": "^1",
-        "jugger-php/jugger-criteria": "^1"
+        "php": "7.1.*",
+        "jugger-php/jugger-criteria": "1.*"
     }
 }

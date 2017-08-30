@@ -1,6 +1,6 @@
 <?php
 
-namespace jugger\compareCriteria;
+namespace jugger\criteriaValidator;
 
 use jugger\criteria\Criteria;
 use jugger\criteria\BetweenCriteria;
@@ -128,7 +128,7 @@ class CriteriaValidator extends BaseValidator
         if (empty($criterias)) {
             return true;
         }
-        
+
         $operator = strtolower($crit->getOperator());
         $result = $operator == 'or' ? false : true;
         foreach ($criterias as $crit) {
