@@ -64,7 +64,7 @@ class GeneralTest extends TestCase
     {
         $data = $this->getData();
         $validator = new CriteriaValidator(
-            new CompareCriteria("date", ">", "01.08.2017")
+            new CompareCriteria("date", ">", new \DateTime('2017-08-01'))
         );
         $this->assertTrue($validator->validate($data[0]));
         $this->assertFalse($validator->validate($data[1]));
@@ -145,7 +145,7 @@ class GeneralTest extends TestCase
             new SimpleLogicCriteria([
                 'or',
                 '<id' => 3,
-                '<date' => new \DateTime("01.01.2017"),
+                '<date' => new \DateTime("2017-01-01"),
             ])
         );
         $this->assertTrue($validator->validate($data[0]));

@@ -117,14 +117,20 @@ class CriteriaValidator extends BaseValidator
             return false;
         }
 
+
         $compareValue = $crit->getValue();
-        return strcasecmp($value, $compareValue);
+        return stripos($value, $compareValue) !== false;
     }
 
     public static function validateLogicCriteria(LogicCriteria $crit, $row): bool
     {
-        $operator = strtolower($crit->getOperator());
         $criterias = $crit->getValue();
+        if (empty($criterias)) {
+            return true;
+        }
+        
+        $operator = strtolower($crit->getOperator());
+        $result = $operator == 'or' ? false : true;
         foreach ($criterias as $crit) {
             $validationResult = (new self($crit))->validate($row);
             // ИЛИ - TRUE если хотя бы один истина
@@ -135,10 +141,10 @@ class CriteriaValidator extends BaseValidator
             }
             // И - FALSE если хотя бы один ложь
             elseif (!$validationResult) {
-                break;
+                return false;
             }
         }
-        return false;
+        return $result;
     }
 
     public static function validateRegexpCriteria(RegexpCriteria $crit, $row): bool
